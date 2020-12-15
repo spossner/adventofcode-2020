@@ -23,10 +23,8 @@ def mod_inverse(a, m)
 end
 
 data = File.readlines('13-data.txt', chomp: true)
-# data = ["","7,13,x,x,59,x,31,19"]
-# data = ["", "17,x,13,19"]
 busses = data[1].split(',').map{ |id| id == 'x' ? 0 : id.to_i}
-# puts "brute force #{brute_force(busses)}"
+# puts "brute force #{brute_force(busses)}" # runs forever
 
 product = 1
 busses.each do |b|
@@ -38,7 +36,7 @@ busses.each_with_index do |n, i|
   if n > 0
     product_without = product / n
     mod_inverse = mod_inverse(product_without, n)
-    total = (total + (n - i % n) * product_without * mod_inverse) % product
+    total = (total + (n - i % n) * product_without * mod_inverse) % product # this is the magic with neutral element and n-i instead of n to reflect shift of busses
   end
 end
 puts "calculated #{total}"
