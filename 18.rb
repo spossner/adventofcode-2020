@@ -1,11 +1,11 @@
 class Parser
   # NOTE the weird precedence in puzzle
   PRECEDENCE = {
-    # '^' => 1,
+    '^' => 1,
     '*' => 1, # * second!
-    # '/' => 1,
+    '/' => 1,
     '+' => 2, # + first!
-    # '-' => 2
+    '-' => 2
   }.freeze
 
   def initialize(exp)
@@ -40,8 +40,8 @@ class Parser
       if !PRECEDENCE[token]
         stack << token
       else
-        op1, op2 = stack.pop(2)
-        stack << eval("#{op1}#{token}#{op2}")
+        v1, v2 = stack.pop(2)
+        stack << eval("#{v1}#{token}#{v2}")
       end
     end.first
   end
